@@ -1,0 +1,100 @@
+Baixando página de pesquisa: https://www.indeed.com.br/empregos?q=programador&l=S%C3%A3o+Paulo%2C+SP&start=10
+	Baixando página da vaga: Desenvolvedor .Net Jr - São Paulo – SP
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor .Net Pleno - São Paulo – SP
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor .Net Sênior - São Paulo – SP
+		Sponsored job. Skipping.
+	Baixando página da vaga: Analista Programador Pleno (VBA/Access)
+		Sponsored job. Skipping.
+	Baixando página da vaga: RJ/18723 - ANALISTA DE SISTEMAS JR
+		Sponsored job. Skipping.
+	Baixando página da vaga: Programador Web Junior
+		R$ 2.000 por mês
+		Salário: R$2.000,00 /mês
+	Baixando página da vaga: Desenvolvedor PHP
+		R$ 3.000 - R$ 5.000 por mês
+		Salário: de R$3.000,00 a R$5.000,00 /mês
+	Baixando página da vaga: Analista de Sistemas
+		R$ 1.900 - R$ 2.300 por mês
+		Salário: de R$1.900,00 a R$2.300,00 /mês
+	Baixando página da vaga: Programador Java
+	Baixando página da vaga: Analista de Sistemas Web
+		R$ 5.500 por mês
+		Salário: R$5.500,00 /mês
+	Baixando página da vaga: Desenvolvedor Front-end
+		R$ 2.000 - R$ 3.800 por mês
+		Salário: de R$2.000,00 a R$3.800,00 /mês
+	Baixando página da vaga: Desenvolvedor FrontEnd
+	Baixando página da vaga: Analista de Sistemas Protheus
+		R$ 5.000 - R$ 6.000 por mês
+		Salário: de R$5.000,00 a R$6.000,00 /mês
+	Baixando página da vaga: Desenvolvedor Java Web
+		Sponsored job. Skipping.
+	Baixando página da vaga: Java Developer
+		Sponsored job. Skipping.
+
+Baixando página de pesquisa: https://www.indeed.com.br/empregos?q=programador&l=S%C3%A3o+Paulo%2C+SP&start=20
+	Baixando página da vaga: Desenvolvedor Java Web
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor .Net Sênior - São Paulo – SP
+		Sponsored job. Skipping.
+	Baixando página da vaga: Java Developer
+		Sponsored job. Skipping.
+	Baixando página da vaga: Analista Programador Junior
+		R$ 3.000 - R$ 3.500 por mês
+		Salário: de R$3.000,00 a R$3.500,00 /mês
+	Baixando página da vaga: Programador Web
+		R$ 4.000 por mês
+		Salário: R$4.000,00 /mês
+	Baixando página da vaga: Desenvolvedor/Administração sistemas
+	Baixando página da vaga: Analista Desenvolvedor de Sistemas .Net
+		Sponsored job. Skipping.
+	Baixando página da vaga: Programador Web
+	Baixando página da vaga: Desenvolvedor JAVA
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor Front-end
+	Baixando página da vaga: Desenvolvedor JAVA Fullstack
+		R$ 4.000 - R$ 5.000 por mês
+		Salário: de R$4.000,00 a R$5.000,00 /mês
+	Baixando página da vaga: Desenvolvedor Frontend
+	Baixando página da vaga: Desenvolvedor Web
+	Baixando página da vaga: Desenvolvedor .Net Jr - São Paulo – SP
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor .Net Pleno - São Paulo – SP
+		Sponsored job. Skipping.
+
+Baixando página de pesquisa: https://www.indeed.com.br/empregos?q=programador&l=S%C3%A3o+Paulo%2C+SP&start=30
+	Baixando página da vaga: Desenvolvedor Java Web
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor .Net Sênior - São Paulo – SP
+		Sponsored job. Skipping.
+	Baixando página da vaga: Java Developer
+		Sponsored job. Skipping.
+	Baixando página da vaga: PROGRAMADOR FRONT-END
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor Web
+	Baixando página da vaga: Estágio de Conteúdo
+		Sponsored job. Skipping.
+	Baixando página da vaga: Analista Programador Web
+		R$ 6.001 - R$ 7.000 por mês
+		Salário: de R$6.001,00 a R$7.000,00 /mês
+	Baixando página da vaga: Desenvolvedor Front-End Jr
+		Sponsored job. Skipping.
+	Baixando página da vaga: Programador Web
+		R$ 1.800 por mês
+		Salário: R$1.800,00 /mês
+	Baixando página da vaga: Programador PHP
+		R$ 2.500 por mês
+		Salário: R$2.500,00 /mês
+	Baixando página da vaga: Analista de Sistemas Júnior
+	Baixando página da vaga: Programador
+		R$ 1.500 - R$ 2.000 por mês
+		Salário: de R$1.500,00 a R$2.000,00 /mês
+	Baixando página da vaga: Desenvolvedor Júnior
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor .Net Jr - São Paulo – SP
+		Sponsored job. Skipping.
+	Baixando página da vaga: Desenvolvedor .Net Pleno - São Paulo – SP
+		Sponsored job. Skipping.
+

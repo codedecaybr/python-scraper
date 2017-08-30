@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-n = 1503614732084
+import re
+
 URL = "https://www.indeed.com.br/empregos?q=programador&l=S%C3%A3o+Paulo%2C+SP&start=##START_INDEX##"
 baseURL = "https://www.indeed.com.br"
 links = []
@@ -15,9 +16,19 @@ for i in range(1,4):
             continue
         print("\tBaixando página da vaga: " + res[i].get("title"))
         jobPage = requests.get(baseURL + res[i].get("href"))
+        if "indeed.com.br" not in jobPage.url:
+            print("\t\tSponsored job. Skipping.")
+            continue
         jobSoup = BeautifulSoup(jobPage.text, 'html.parser')
-        ps = soup.find_all(class_="p")
+        ps = jobSoup.find_all("span", attrs={"style":"white-space: nowrap"})
         for p in ps:
-            if "Salário" in p:
-                print (p.get_text())
-    input()
+            print("\t\t" + p.get_text())
+
+        ps = jobSoup.find("span", id="job_summary")
+        if ps is not None:
+            ps = ps.find_all("p")
+            for p in ps:
+                if "Salário: " in p.get_text():
+                    print("\t\t" + p.get_text())
+
+    print()
