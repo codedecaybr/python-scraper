@@ -7,6 +7,28 @@ from bs4 import BeautifulSoup
 URL = "https://www.indeed.com.br/empregos?q=programador&l=S%C3%A3o+Paulo%2C+SP&start=##START_INDEX##"
 baseURL = "https://www.indeed.com.br"
 
+lReqs = ["Java", "PHP", "Net", "C++", "Pyhon", " C ", "C#", " R ", "VBA",
+    "Excel", "Ruby", "Android", "CSS", "HTML", "Swift"]
+
+class Requisito:
+
+    def __init__(self, nome):
+        self.nome = nome
+        self.ocorrencias = 0
+        self.salarios = []
+
+    def add(self, salario):
+        self.ocorrencias += 1
+        if salario > 0:
+            self.salarios.append(salario)
+
+    def printEstat(self):
+        print(self.nome)
+        print("\tFrequência: %d" %(self.ocorrencias))
+        print("\tVagas com salário: %d" %(len(self.salarios)))
+        if len(self.salarios) > 0:
+            print("\tMédia de salário: R$ %.2f" %(sum(self.salarios)/len(self.salarios)) )
+
 
 def obterPagPesquisa(i):
     """
@@ -35,7 +57,13 @@ def obterPagVaga(jobLink):
 
     print("\tBaixando página da vaga: " + jobLink.get("title"))
     # download da página da vaga:
-    jobPage = requests.get(baseURL + jobLink.get("href"))
+    with requests.Session() as s:
+        s.max_redirects = 1
+        try:
+            jobPage = s.get(baseURL + jobLink.get("href"), timeout=2)
+        except:
+            print("\t\tToo many redirects. Maybe it is a sponsored job.")
+            return None
     # verifica se a página baixada pertence
     # ao domínio do indeed.
     # as vagas patrocinadas redirecionam para sites
@@ -79,28 +107,52 @@ def converteSalario(salarioVetor):
     Ex:
         paragrafo <= 'Salário: de R$ 1.800 - R$ 2.000'
         vetor <= ['Salário:', 'de', 'R$', '1.800', '-', 'R$', '2.000']
-        retorno <= 1800.00
+        retorno <= ( 1800.00 + 2000.00 ) / 2
     """
     # para cada palavra dentro do vetor:
+    f = 0
+    cont = 0
     for s in salarioVetor:
         # tenta fazer a conversao para float:
         try:
-            f = 1000*float(s)
-            # sem erro, retorna o valor convertido:
-            return f
+            f += 1000*float(s)
         # caso a palavra não seja uma representação válida de float:
         except ValueError:
             # passa para a próxima
             continue
-    return None
+        cont += 1
+    if cont != 0:
+        f = f/cont
+    return f
+
+def procuraRequisitos(jobSoup, requisitos, salario):
+    descricao = jobSoup.find("span", id="job_summary")
+    if descricao is not None:
+        # separa os paragráfos e navega por cada um:
+        conteudoDescricao = descricao.get_text().lower()
+        for req in requisitos:
+            if req.lower() in conteudoDescricao:
+                print("\t\t" + req)
+                requisitos[req].add(salario)
+                continue
+
+def inicializaRequisitos(listaRequisitos):
+    reqsDct = {}
+    for r in listaRequisitos:
+        reqsDct[r] = Requisito(r)
+    return reqsDct
+
+
 
 
 def main():
     contVagas = 0
     somaSalario = 0
 
+    requisitos = inicializaRequisitos(lReqs)
+
     # número de páginas de pesquisa a serem baixadas:
-    for i in range(0,1):
+    for i in range(0,10):
 
         # obtém página de resultado de pesquisa:
         searchSoup = obterPagPesquisa(i)
@@ -122,14 +174,18 @@ def main():
             salarioVetor = procuraSalario(jobSoup)
             # tenta converter o salário encontrado para um número decimal:
             salario = converteSalario(salarioVetor)
-            if salario is not None:
+            if salario != 0:
                 print("\t\tR$ %.2f" %(salario))
                 somaSalario += salario
                 contVagas += 1
+            procuraRequisitos(jobSoup, requisitos, salario)
 
         print()
 
     print("Vagas com Salário Encontradas: %d" %(contVagas))
     print("Média das Ofertas: R$ %.2f" %(somaSalario/contVagas))
+
+    for req in requisitos:
+        requisitos[req].printEstat()
 
 main()
