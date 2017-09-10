@@ -1,4 +1,4 @@
-# Workshop Data Science #
+# Workshop Data Science / Web Scraping #
 
 ## Hackeando o Mercado de Trabalho com Python ##
 
