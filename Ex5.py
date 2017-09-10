@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from auxiliar import Requisito
+from auxiliar import converteSalario, Requisito
 
 
 ## URLS DE BASE ##
@@ -36,21 +36,21 @@ def obterPagVaga(jobLink):
     anunciada.
     """
 
-    print("\tBaixando página da vaga: " + jobLink.get("title"))
+    print("\tBaixando página da vaga: %s" %(jobLink.get("title")))
     # download da página da vaga:
     with requests.Session() as s:
         s.max_redirects = 1
         try:
             jobPage = s.get(baseURL + jobLink.get("href"), timeout=2)
-        except requests.exceptions.TooManyRedirects:
-            print("\t\tToo many redirects. Maybe it is a sponsored job.")
+        except requests.RequestException:
+            print("\t\tMuitos redirecionamentos. Deve ser uma vaga patrocinada.")
             return None
     # verifica se a página baixada pertence
     # ao domínio do indeed.
     # as vagas patrocinadas redirecionam para sites
     # externos, com estruturas desconhecidas
     if "indeed.com.br" not in jobPage.url:
-        print("\t\tSponsored job. Skipping.")
+        print("\t\tVaga patrocinada. Ignorando.")
         return None
     # conversão para o objeto do BeautifulSoup:
     jobSoup = BeautifulSoup(jobPage.text, 'html.parser')
@@ -81,31 +81,6 @@ def procuraSalario(jobSoup):
                     salarioVetor = p.get_text().split(" ")
     return salarioVetor
 
-def converteSalario(salarioVetor):
-    """
-    Converte um parágrafo com a ocorrência de salário em
-    um número decimal.
-    Ex:
-        paragrafo <= 'Salário: de R$ 1.800 - R$ 2.000'
-        vetor <= ['Salário:', 'de', 'R$', '1.800', '-', 'R$', '2.000']
-        retorno <= ( 1800.00 + 2000.00 ) / 2
-    """
-    # para cada palavra dentro do vetor:
-    f = 0
-    cont = 0
-    for s in salarioVetor:
-        # tenta fazer a conversao para float:
-        try:
-            f += 1000*float(s)
-        # caso a palavra não seja uma representação válida de float:
-        except ValueError:
-            # passa para a próxima
-            continue
-        cont += 1
-    if cont != 0:
-        f = f/cont
-    return f
-
 def procuraRequisitos(jobSoup, requisitos, salario):
     descricao = jobSoup.find("span", id="job_summary")
     if descricao is not None:
@@ -125,9 +100,6 @@ def inicializaRequisitos(listaRequisitos):
 
 def main():
 
-    contVagas = 0
-    somaSalario = 0
-
     requisitos = inicializaRequisitos(lReqs)
 
     # número de páginas de pesquisa a serem baixadas:
@@ -141,9 +113,6 @@ def main():
 
         # para cada link encontrado...
         for jobLink in jobsLinks:
-            # verifica se é válido (pula links com nomes de empresas)
-            if jobLink.get("title") is None:
-                continue
 
             # baixa a página com o detalhe da vaga:
             jobSoup = obterPagVaga(jobLink)
@@ -154,16 +123,9 @@ def main():
             salarioVetor = procuraSalario(jobSoup)
             # tenta converter o salário encontrado para um número decimal:
             salario = converteSalario(salarioVetor)
-            if salario != 0:
-                print("\t\tR$ %.2f" %(salario))
-                somaSalario += salario
-                contVagas += 1
+            print("\t\tR$ %.2f" %(salario))
             procuraRequisitos(jobSoup, requisitos, salario)
 
-        input()
-
-    print("Vagas com Salário Encontradas: %d" %(contVagas))
-    print("Média das Ofertas: R$ %.2f" %(somaSalario/contVagas))
 
     for req in requisitos:
         requisitos[req].printEstat()

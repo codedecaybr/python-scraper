@@ -21,12 +21,11 @@ def obterPagPesquisa(i):
 def main():
 
     # número de páginas de pesquisa a serem baixadas:
-    for i in range(0,10):
+    for i in range(1):
 
         # obtém página de resultado de pesquisa:
         searchPage = obterPagPesquisa(i)
 
         print(searchPage.text)
-        input()
 
 main()

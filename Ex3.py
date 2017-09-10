@@ -32,21 +32,21 @@ def obterPagVaga(jobLink):
     anunciada.
     """
 
-    print("\tBaixando página da vaga: " + jobLink.get("title"))
+    print("\tBaixando página da vaga: %s" %(jobLink.get("title")))
     # download da página da vaga:
     with requests.Session() as s:
         s.max_redirects = 1
         try:
             jobPage = s.get(baseURL + jobLink.get("href"), timeout=2)
-        except requests.exceptions.TooManyRedirects:
-            print("\t\tToo many redirects. Maybe it is a sponsored job.")
+        except requests.RequestException:
+            print("\t\tMuitos redirecionamentos. Deve ser uma vaga patrocinada.")
             return None
     # verifica se a página baixada pertence
     # ao domínio do indeed.
     # as vagas patrocinadas redirecionam para sites
     # externos, com estruturas desconhecidas
     if "indeed.com.br" not in jobPage.url:
-        print("\t\tSponsored job. Skipping.")
+        print("\t\tVaga patrocinada. Ignorando.")
         return None
     # conversão para o objeto do BeautifulSoup:
     jobSoup = BeautifulSoup(jobPage.text, 'html.parser')
@@ -56,7 +56,7 @@ def obterPagVaga(jobLink):
 def main():
 
     # número de páginas de pesquisa a serem baixadas:
-    for i in range(0,10):
+    for i in range(1):
 
         # obtém página de resultado de pesquisa:
         # obtém página de resultado de pesquisa:
@@ -66,15 +66,10 @@ def main():
 
         # para cada link encontrado...
         for jobLink in jobsLinks:
-            # verifica se é válido (pula links com nomes de empresas)
-            if jobLink.get("title") is None:
-                continue
 
             # baixa a página com o detalhe da vaga:
             jobSoup = obterPagVaga(jobLink)
             if jobSoup is None:
                 continue
-
-        input()
 
 main()

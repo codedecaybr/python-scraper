@@ -25,7 +25,7 @@ def obterPagPesquisa(i):
 def main():
 
     # número de páginas de pesquisa a serem baixadas:
-    for i in range(0,10):
+    for i in range(1):
 
         # obtém página de resultado de pesquisa:
         # obtém página de resultado de pesquisa:
@@ -35,12 +35,7 @@ def main():
 
         # para cada link encontrado...
         for jobLink in jobsLinks:
-            # verifica se é válido (pula links com nomes de empresas)
-            if jobLink.get("title") is None:
-                continue
-            else:
-                print(jobLink.get("title"))
+            print(jobLink.get("href"))
 
-        input()
 
 main()

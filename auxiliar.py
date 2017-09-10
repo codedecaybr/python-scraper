@@ -28,6 +28,31 @@ class Requisito:
         if len(self.salarios) > 0:
             print("\tMédia de salário: R$ %.2f" %( self.salarioMedio() ))
 
+def converteSalario(salarioVetor):
+    """
+    Converte um parágrafo com a ocorrência de salário em
+    um número decimal.
+    Ex:
+        paragrafo <= 'Salário: de R$ 1.800 - R$ 2.000'
+        vetor <= ['Salário:', 'de', 'R$', '1.800', '-', 'R$', '2.000']
+        retorno <= ( 1800.00 + 2000.00 ) / 2
+    """
+    # para cada palavra dentro do vetor:
+    f = 0
+    cont = 0
+    for s in salarioVetor:
+        # tenta fazer a conversao para float:
+        try:
+            f += 1000*float(s)
+        # caso a palavra não seja uma representação válida de float:
+        except ValueError:
+            # passa para a próxima
+            continue
+        cont += 1
+    if cont != 0:
+        f = f/cont
+    return f
+
 def ScrapView(reqs):
     y1 = []
     y2 = []
