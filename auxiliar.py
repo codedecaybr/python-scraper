@@ -53,6 +53,12 @@ def converteSalario(salarioVetor):
         f = f/cont
     return f
 
+def inicializaRequisitos(listaRequisitos):
+    reqsDct = {}
+    for r in listaRequisitos:
+        reqsDct[r] = Requisito(r)
+    return reqsDct
+
 def ScrapView(reqs):
     y1 = []
     y2 = []

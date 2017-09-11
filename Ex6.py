@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from auxiliar import converteSalario, Requisito, ScrapView
+from auxiliar import converteSalario, Requisito, ScrapView, inicializaRequisitos
 
 
 ## URLS DE BASE ##
@@ -90,13 +90,6 @@ def procuraRequisitos(jobSoup, requisitos, salario):
             if req.lower() in conteudoDescricao:
                 print("\t\t" + req)
                 requisitos[req].add(salario)
-                continue
-
-def inicializaRequisitos(listaRequisitos):
-    reqsDct = {}
-    for r in listaRequisitos:
-        reqsDct[r] = Requisito(r)
-    return reqsDct
 
 def main():
 
