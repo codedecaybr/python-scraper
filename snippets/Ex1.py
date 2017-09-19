@@ -9,8 +9,8 @@ print(respose.text)
 # construindo a URL dinâmicamente
 i = 30
 URL = "https://www.indeed.com.br/empregos?q=programador&l=S%C3%A3o+Paulo%2C+SP&start=##START_INDEX##"
-rURL = URL.replace("##START_INDEX##", i)
+rURL = URL.replace("##START_INDEX##", str(i))
 print(rURL)
 response = requests.get(rURL)
 print(response.status_code)
-print(respose.text)
+# print(respose.text) - evitar executar, apenas citar: suja a tela com texto

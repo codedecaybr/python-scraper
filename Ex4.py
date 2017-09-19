@@ -61,7 +61,7 @@ def procuraSalario(jobSoup):
     """
     salarioVetor = []
     # procura o salário no campo mais comum:
-    campoSalario = jobSoup.find("span", attrs={"style":"white-space: nowrap"})
+    campoSalario = jobSoup.find("span", class_="no-wrap")
     # se encontra, picota o parágrafo e armazena no vetor:
     if campoSalario is not None:
         salarioVetor = campoSalario.get_text().split(" ")
